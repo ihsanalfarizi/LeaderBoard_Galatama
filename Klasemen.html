@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galatama Taaronnn7Store X NicotinStore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --silver:#D7DCE1;
+    --silver-dark:#9AA2AA;
+    --red:#FF3B4A;
+    --red-deep:#5C0D14;
+    --panel:#3A0A10;
+    --panel-line:#5C1620;
+    --ink:#FFFFFF;
+    --muted:#F0C9C9;
+    --green:#3ECF6E;
+    --green-deep:#1D6B36;
+    --zero-red:#FF5C64;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background-color:#7A0C16;
+    background-image:repeating-linear-gradient(
+      90deg,
+      #7A0C16 0px,
+      #7A0C16 60px,
+      #931421 60px,
+      #931421 120px
+    );
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    padding:40px 16px 60px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;}
+
+  .eyebrow{
+    text-align:center;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.35em;
+    color:var(--silver);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    letter-spacing:0.02em;
+    font-size:clamp(20px,4.2vw,34px);
+    color:#FFFFFF;
+    margin:0 0 6px;
+    text-transform:uppercase;
+    text-align:center;
+    text-shadow:0 2px 0 rgba(0,0,0,0.25);
+  }
+  .sub{
+    font-size:13px;
+    color:var(--silver);
+    text-align:center;
+    letter-spacing:0.02em;
+    margin-bottom:28px;
+  }
+
+  .event-info{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:0 0 22px;
+  }
+  .event-info .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(0,0,0,0.28);
+    border:1.5px solid var(--red);
+    color:#FFFFFF;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.02em;
+    padding:10px 18px;
+    border-radius:10px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.3);
+  }
+  .event-info .chip .icon{font-size:30px;}
+
+  .panel{
+    background:linear-gradient(180deg, var(--panel), #2A0509);
+    border:1.5px solid var(--silver-dark);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.35);
+  }
+
+  .tables{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    position:relative;
+  }
+  .tables::after{
+    content:"";
+    position:absolute;
+    top:4px;
+    bottom:4px;
+    left:50%;
+    width:0;
+    border-left:1.5px dashed var(--silver-dark);
+    transform:translateX(-10px);
+  }
+  @media (max-width:820px){
+    .tables{grid-template-columns:1fr;}
+    .tables::after{display:none;}
+  }
+
+  .table-col{display:flex;flex-direction:column;}
+  .section-label{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--silver);
+    text-align:center;
+    margin:0 0 10px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--panel-line);
+  }
+
+  .table-scroll{overflow-x:auto;}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+  }
+  thead th{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--red);
+    text-align:left;
+    padding:8px 6px 12px;
+    border-bottom:2px solid var(--panel-line);
+  }
+  th.center, td.center{text-align:center;}
+
+  th.nick, td.nick{
+    border-left:1.5px solid var(--panel-line);
+    padding-left:12px;
+  }
+  th.pay, td.pay{
+    border-left:1.5px solid var(--panel-line);
+  }
+
+  col.col-rank{width:44px;}
+  col.col-name{width:auto;}
+  col.col-nick{width:26%;}
+  col.col-points{width:92px;}
+  col.col-pay{width:88px;}
+
+  tbody tr td{
+    padding:11px 6px;
+    border-bottom:1px dashed var(--panel-line);
+    vertical-align:middle;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.center{padding-left:4px;padding-right:4px;}
+
+  td.rank{width:44px;}
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    border-radius:7px;
+    background:var(--panel-line);
+    color:#FFFFFF;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);
+  }
+  .badge.gold{background:linear-gradient(180deg,#FFE9A8,#E8B84B);color:#4A2F00;}
+  .badge.silver{background:linear-gradient(180deg,#F1F3F5,#B9C0C7);color:#1D1D1D;}
+  .badge.bronze{background:linear-gradient(180deg,#D89468,#B36A50);color:#2A0F06;}
+
+  input.team-name{
+    width:100%;
+    border:none;
+    background:transparent;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
+    padding:5px 4px;
+    border-radius:5px;
+  }
+  input.team-name::placeholder{color:var(--muted);}
+  input.team-name:hover{background:rgba(255,255,255,0.06);}
+  input.team-name:focus{outline:none;background:rgba(255,255,255,0.08);box-shadow:0 0 0 2px var(--red);}
+
+  input.team-nick{
+    width:100%;
+    border:none;
+    background:transparent;
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:13.5px;
+    color:var(--muted);
+    padding:5px 4px;
+    border-radius:5px;
+  }
+  input.team-nick::placeholder{color:rgba(240,201,201,0.55);}
+  input.team-nick:hover{background:rgba(255,255,255,0.06);}
+  input.team-nick:focus{outline:none;background:rgba(255,255,255,0.08);box-shadow:0 0 0 2px var(--red);color:#FFFFFF;}
+
+  /* Poin = 0 -> nama & nickname merah */
+  input.team-name.zero-points{color:var(--zero-red) !important;}
+  input.team-nick.zero-points{color:var(--zero-red) !important;}
+
+  /* Poin > 1 -> nama & nickname hijau */
+  input.team-name.high-points{color:var(--green) !important;}
+  input.team-nick.high-points{color:var(--green) !important;}
+
+  input.points{
+    width:100%;
+    max-width:76px;
+    border:2px solid var(--panel-line);
+    background:rgba(0,0,0,0.35);
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:#FFFFFF;
+    text-align:center;
+    padding:7px 2px;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.35);
+    transition:border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    margin:0 auto;
+    display:block;
+  }
+  input.points:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(255,59,74,0.4);}
+
+  /* Poin = 0 -> kotak poin merah */
+  input.points.zero-points{
+    border-color:var(--zero-red);
+    color:var(--zero-red);
+    background:rgba(255,92,100,0.12);
+  }
+  /* Poin > 1 -> kotak poin hijau, lebih menonjol */
+  input.points.high-points{
+    border-color:var(--green);
+    color:var(--green);
+    background:rgba(62,207,110,0.14);
+    box-shadow:0 0 0 3px rgba(62,207,110,0.25), 0 2px 8px rgba(0,0,0,0.35);
+  }
+
+  .pay-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-width:76px;
+    padding:6px 8px;
+    border-radius:7px;
+    border:1.5px solid transparent;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+    user-select:none;
+    transition:transform 0.06s ease;
+  }
+  .pay-toggle:active{transform:scale(0.96);}
+  .pay-toggle.unpaid{
+    background:rgba(255,59,74,0.15);
+    border-color:var(--red);
+    color:#FFB4BA;
+  }
+  .pay-toggle.paid{
+    background:rgba(62,207,110,0.15);
+    border-color:var(--green);
+    color:#9CF0B6;
+  }
+
+  .info-badges{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+  }
+  .info-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:linear-gradient(180deg, #FFE9A8, #E8B84B);
+    color:#4A2F00;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.03em;
+    padding:8px 16px;
+    border-radius:999px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.3);
+  }
+  .info-badge .label{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    opacity:0.75;
+  }
+
+  .prizes{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin:18px 0 24px;
+  }
+  .prize-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(180deg, var(--panel), #2A0509);
+    border:1.5px solid var(--silver-dark);
+    border-radius:12px;
+    padding:10px 18px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  }
+  .prize-card .medal{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:14px;
+  }
+  .prize-card.p1 .medal{background:linear-gradient(180deg,#FFE9A8,#E8B84B);color:#4A2F00;}
+  .prize-card.p2 .medal{background:linear-gradient(180deg,#F1F3F5,#B9C0C7);color:#1D1D1D;}
+  .prize-card.p3 .medal{background:linear-gradient(180deg,#D89468,#B36A50);color:#2A0F06;}
+  .prize-card .prize-text{display:flex;flex-direction:column;line-height:1.2;}
+  .prize-card .prize-label{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .prize-card .prize-amount{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:18px;
+    color:#FFFFFF;
+  }
+
+  .rules{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:22px;
+  }
+  .rule-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(0,0,0,0.4);
+    border:1.5px solid var(--silver-dark);
+    color:#FFFFFF;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:0.01em;
+    padding:14px 24px;
+    border-radius:9px;
+    text-shadow:0 1px 3px rgba(0,0,0,0.5);
+  }
+  .rule-chip b{color:var(--red);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+
+  <div class="panel">
+    <div class="tables">
+      <div class="table-col">
+        <div class="table-scroll">
+          <table>
+            <colgroup>
+              <col class="col-rank">
+              <col class="col-name">
+              <col class="col-nick">
+              <col class="col-points">
+              <col class="col-pay">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">Rank</th>
+                <th>Nama Peserta</th>
+                <th class="nick">Nickname</th>
+                <th class="center">Poin</th>
+                <th class="center pay">Status Pay</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyTop"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="table-col">
+        <div class="table-scroll">
+          <table>
+            <colgroup>
+              <col class="col-rank">
+              <col class="col-name">
+              <col class="col-nick">
+              <col class="col-points">
+              <col class="col-pay">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">Rank</th>
+                <th>Nama Peserta</th>
+                <th class="nick">Nickname</th>
+                <th class="center">Poin</th>
+                <th class="center pay">Status Pay</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyBottom"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const namaPeserta = [
+    "","","","","","","","","","",
+    "","","","","","","","","",""
+  ];
+  const nicknamePeserta = [
+    "","","","","","","","","","",
+    "","","","","","","","","",""
+  ];
+  const defaultTeams = [];
+  for(let i=1;i<=20;i++){
+    defaultTeams.push({ id:i, name:namaPeserta[i-1], nickname:nicknamePeserta[i-1], points:0, paid:false });
+  }
+
+  let teams = JSON.parse(JSON.stringify(defaultTeams));
+
+  const tbodyTop = document.getElementById('tableBodyTop');
+  const tbodyBottom = document.getElementById('tableBodyBottom');
+
+  function getSorted(){
+    return [...teams].sort((a,b)=> b.points - a.points || a.id - b.id);
+  }
+
+  function buildRow(team, rank){
+    const tr = document.createElement('tr');
+
+    const tdRank = document.createElement('td');
+    tdRank.className = 'rank center';
+    let badgeClass = 'badge';
+    if(rank === 1) badgeClass += ' gold';
+    else if(rank === 2) badgeClass += ' silver';
+    else if(rank === 3) badgeClass += ' bronze';
+    tdRank.innerHTML = '<span class="' + badgeClass + '">' + rank + '</span>';
+
+    const pointsClass = team.points === 0 ? ' zero-points' : (team.points > 1 ? ' high-points' : '');
+
+    const tdName = document.createElement('td');
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'team-name' + pointsClass;
+    nameInput.value = team.name;
+    nameInput.placeholder = 'Nama';
+    nameInput.addEventListener('input', (e) => {
+      const t = teams.find(x => x.id === team.id);
+      t.name = e.target.value;
+    });
+    tdName.appendChild(nameInput);
+
+    const tdNick = document.createElement('td');
+    tdNick.className = 'nick';
+    const nickInput = document.createElement('input');
+    nickInput.type = 'text';
+    nickInput.className = 'team-nick' + pointsClass;
+    nickInput.value = team.nickname;
+    nickInput.placeholder = 'Nama Display';
+    nickInput.addEventListener('input', (e) => {
+      const t = teams.find(x => x.id === team.id);
+      t.nickname = e.target.value;
+    });
+    tdNick.appendChild(nickInput);
+
+    const tdPoints = document.createElement('td');
+    tdPoints.className = 'center';
+    const pointsInput = document.createElement('input');
+    pointsInput.type = 'number';
+    pointsInput.className = 'points' + pointsClass;
+    pointsInput.value = team.points;
+    pointsInput.min = '0';
+    pointsInput.addEventListener('input', (e) => {
+      const t = teams.find(x => x.id === team.id);
+      t.points = parseInt(e.target.value) || 0;
+      render();
+    });
+    tdPoints.appendChild(pointsInput);
+
+    const tdPay = document.createElement('td');
+    tdPay.className = 'center pay';
+    const payBtn = document.createElement('button');
+    payBtn.type = 'button';
+    payBtn.className = 'pay-toggle ' + (team.paid ? 'paid' : 'unpaid');
+    payBtn.textContent = team.paid ? '✅' : '❌';
+    payBtn.addEventListener('click', () => {
+      const t = teams.find(x => x.id === team.id);
+      t.paid = !t.paid;
+      payBtn.className = 'pay-toggle ' + (t.paid ? 'paid' : 'unpaid');
+      payBtn.textContent = t.paid ? '✅' : '❌';
+    });
+    tdPay.appendChild(payBtn);
+
+    tr.appendChild(tdRank);
+    tr.appendChild(tdName);
+    tr.appendChild(tdNick);
+    tr.appendChild(tdPoints);
+    tr.appendChild(tdPay);
+    return tr;
+  }
+
+  function render(){
+    const sorted = getSorted();
+    tbodyTop.innerHTML = '';
+    tbodyBottom.innerHTML = '';
+    sorted.forEach((team, idx) => {
+      const rank = idx + 1;
+      const row = buildRow(team, rank);
+      if(rank <= 10) tbodyTop.appendChild(row);
+      else tbodyBottom.appendChild(row);
+    });
+  }
+
+  render();
+</script>
+</body>
+</html>
